@@ -7,9 +7,13 @@ using System.Threading.Tasks;
 
 namespace HotVagoDAL.Models
 {
-    public class PropertyType : Common
+    public class RoomFacilities : Common
     {
-        public string PropertyTypeName { get; set; }
-        
+        [ForeignKey("Facilities")]
+        public int FacilitiesID { get; set; }
+
+        [ForeignKey("Room")]
+
+        public int RoomID { get; set; }
     }
 }

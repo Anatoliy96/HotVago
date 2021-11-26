@@ -9,10 +9,10 @@ namespace HotVagoDAL.Models
 {
     public class Room : Common
     {
-        [ForeignKey("PropertyID")]
+        [ForeignKey("Property")]
         public int PropertyID { get; set; }
 
-        [ForeignKey("RoomTypeID")]
+        [ForeignKey("RoomType")]
         public int RoomTypeID { get; set; }
     }
 }

@@ -3,14 +3,16 @@ using System;
 using HotVagoDAL.DAO.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HotVago.Migrations
 {
     [DbContext(typeof(HotVagoContext))]
-    partial class HotVagoContextModelSnapshot : ModelSnapshot
+    [Migration("20211125070622_facilities")]
+    partial class facilities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -167,9 +169,6 @@ namespace HotVago.Migrations
                     b.Property<string>("PropertyName")
                         .HasColumnType("text");
 
-                    b.Property<int>("PropertyTypeID")
-                        .HasColumnType("int");
-
                     b.HasKey("ID");
 
                     b.ToTable("Property");
@@ -179,6 +178,9 @@ namespace HotVago.Migrations
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("PropertyID")
                         .HasColumnType("int");
 
                     b.Property<string>("PropertyTypeName")

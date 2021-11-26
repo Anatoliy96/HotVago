@@ -9,7 +9,7 @@ namespace HotVagoDAL.Models
 {
    public class Payments : Common
     {
-        [ForeignKey("RoomID")]
+        [ForeignKey("Room")]
         public int RoomID { get; set; }
 
         public DateTime Date { get; set; }

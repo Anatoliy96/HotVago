@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotVagoDAL.Models
+namespace HotVagoBLL.BLL.DTO
 {
-   public class Property : Common
+   public class PropertyDTO : IDto
     {
+        public int ID { get; set; }
         public string PropertyName { get; set; }
 
         public string Description { get; set; }
@@ -24,8 +24,5 @@ namespace HotVagoDAL.Models
         public int PhoneNumber { get; set; }
 
         public string Email { get; set; }
-
-        [ForeignKey("PropertyType")]
-        public int PropertyTypeID { get; set; }
     }
 }

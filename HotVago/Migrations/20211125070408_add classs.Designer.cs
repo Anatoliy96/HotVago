@@ -3,14 +3,16 @@ using System;
 using HotVagoDAL.DAO.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HotVago.Migrations
 {
     [DbContext(typeof(HotVagoContext))]
-    partial class HotVagoContextModelSnapshot : ModelSnapshot
+    [Migration("20211125070408_add classs")]
+    partial class addclasss
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,37 +46,6 @@ namespace HotVago.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Bookings");
-                });
-
-            modelBuilder.Entity("HotVagoDAL.Models.Facilities", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("FacilityTypeID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Facilities");
-                });
-
-            modelBuilder.Entity("HotVagoDAL.Models.FacilityType", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("FacilityTypes");
                 });
 
             modelBuilder.Entity("HotVagoDAL.Models.Guests", b =>
@@ -167,9 +138,6 @@ namespace HotVago.Migrations
                     b.Property<string>("PropertyName")
                         .HasColumnType("text");
 
-                    b.Property<int>("PropertyTypeID")
-                        .HasColumnType("int");
-
                     b.HasKey("ID");
 
                     b.ToTable("Property");
@@ -179,6 +147,9 @@ namespace HotVago.Migrations
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("PropertyID")
                         .HasColumnType("int");
 
                     b.Property<string>("PropertyTypeName")
@@ -204,23 +175,6 @@ namespace HotVago.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Rooms");
-                });
-
-            modelBuilder.Entity("HotVagoDAL.Models.RoomFacilities", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("FacilitiesID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RoomID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("RoomFacilities");
                 });
 
             modelBuilder.Entity("HotVagoDAL.Models.RoomType", b =>
