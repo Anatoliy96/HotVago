@@ -24,7 +24,7 @@ namespace HotVago.Controllers
             if (result == null)
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "No data found" });
 
-            return Ok(new Response { Status = "Succeeded", Message = "Data retrive succesfully" });
+            return Ok(result);
         }
 
         [Route("PropertyID")]
@@ -35,9 +35,8 @@ namespace HotVago.Controllers
             var result = propertyBLL.Get(ID);
 
             if (result == null)
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "No id found" });
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "No such id found" });
 
-            //return Ok(new Response { Status = "Succeeded", Message = "Data retrive succesfully" });
             return Ok(result);
         }
 
@@ -70,6 +69,8 @@ namespace HotVago.Controllers
                     PropertyTypeID);
 
                 return Ok(new Response { Status = "Succeeded", Message = "Property added succesfully" });
+                //return Ok(propertyBLL);
+
             }
             else
             {

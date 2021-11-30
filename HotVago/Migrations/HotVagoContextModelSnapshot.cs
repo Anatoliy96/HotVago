@@ -232,14 +232,14 @@ namespace HotVago.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<int>("NumberOfRooms")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18, 2)");
-
-                    b.Property<bool>("RoomStatus")
-                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("RoomTypes")
                         .HasColumnType("text");

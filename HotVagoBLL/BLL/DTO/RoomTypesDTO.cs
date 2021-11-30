@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotVagoDAL.Models
+namespace HotVagoBLL.BLL.DTO
 {
-   public class RoomType : Common 
+    public class RoomTypesDTO
     {
+        public int ID { get; set; }
         public string RoomTypes { get; set; }
         public bool IsActive { get; set; }
         public int Sleeps { get; set; }

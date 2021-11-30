@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotVago.Migrations
 {
     [DbContext(typeof(HotVagoContext))]
-    [Migration("20211126095953_chanage proprty foreing key")]
-    partial class chanageproprtyforeingkey
+    [Migration("20211130183637_fhfh")]
+    partial class fhfh
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -234,14 +234,14 @@ namespace HotVago.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<int>("NumberOfRooms")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18, 2)");
-
-                    b.Property<bool>("RoomStatus")
-                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("RoomTypes")
                         .HasColumnType("text");
