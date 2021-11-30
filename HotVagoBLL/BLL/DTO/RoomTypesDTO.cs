@@ -14,7 +14,6 @@ namespace HotVagoBLL.BLL.DTO
         public int Sleeps { get; set; }
         public decimal Price { get; set; }
         public int NumberOfRooms { get; set; }
-
         public string Description { get; set; }
     }
 }

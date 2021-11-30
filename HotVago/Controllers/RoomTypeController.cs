@@ -13,7 +13,7 @@ namespace HotVago.Controllers
     [ApiController]
     public class RoomTypeController : Controller
     {
-        [Route("GetAll")]
+        [Route("AllRoomTypes")]
         [HttpGet]
         public IActionResult GetAll()
         {

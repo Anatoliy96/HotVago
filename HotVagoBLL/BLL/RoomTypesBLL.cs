@@ -11,36 +11,29 @@ namespace HotVagoBLL.BLL
 {
     public class RoomTypesBLL
     {
-
-        public enum status
-        {
-            Free,
-            Reserved
-        }
-        public List<RoomTypesDTO> GetAll()
+        public List<RoomTypesStatusDTO> GetAll()
         {
             RoomTypeDAO roomTypesDAO = new RoomTypeDAO();
             List<RoomType> roomTypes = (List<RoomType>)roomTypesDAO.GetAll();
-            List<RoomTypesDTO> roomTypesDTOs = new List<RoomTypesDTO>();
+            List<RoomTypesStatusDTO> roomTypesDTOs = new List<RoomTypesStatusDTO>();
 
-            foreach (var roomtype in roomTypes)
+            foreach (RoomType roomtype in roomTypes)
             {
-                CloneData.CloneData<RoomType, RoomTypesDTO> convertor =
-                    new CloneData.CloneData<RoomType, RoomTypesDTO>();
-
+                CloneData.CloneData<RoomType, RoomTypesStatusDTO> convertor =
+                    new CloneData.CloneData<RoomType, RoomTypesStatusDTO>();
                 roomTypesDTOs.Add(convertor.CopyData(roomtype));
-
                 RoomTypesStatusDTO statusDTO = new RoomTypesStatusDTO();
 
                 if (statusDTO.IsActive == true)
                 {
-                    statusDTO.RoomStatus = status.Free.ToString();
+                    statusDTO.RoomStatus = "Free";
                 }
 
-                else
+                if(statusDTO.IsActive == false)
                 {
-                    statusDTO.RoomStatus = status.Reserved.ToString();
+                    statusDTO.RoomStatus = "Reserved";
                 }
+                roomTypesDTOs.Add(statusDTO);
             }
             return roomTypesDTOs;
         }
