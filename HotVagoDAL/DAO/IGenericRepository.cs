@@ -14,6 +14,6 @@ namespace HotVagoDAL.DAO
         IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> expression);
         void Add(TEntity entity);
         void Update(TEntity entity);
-        void Delete(TEntity entity);
+        void Delete(int ID);
     }
 }

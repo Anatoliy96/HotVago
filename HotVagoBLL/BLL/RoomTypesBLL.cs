@@ -11,33 +11,71 @@ namespace HotVagoBLL.BLL
 {
     public class RoomTypesBLL
     {
-        public List<RoomTypesStatusDTO> GetAll()
+        public List<RoomTypesDTO> GetAll()
         {
             RoomTypeDAO roomTypesDAO = new RoomTypeDAO();
             List<RoomType> roomTypes = (List<RoomType>)roomTypesDAO.GetAll();
-            List<RoomTypesStatusDTO> roomTypesDTOs = new List<RoomTypesStatusDTO>();
+            List<RoomTypesDTO> roomTypesDTOs = new List<RoomTypesDTO>();
 
-            foreach (RoomType roomtype in roomTypes)
+            foreach (var roomtype in roomTypes)
             {
-                CloneData.CloneData<RoomType, RoomTypesStatusDTO> convertor =
-                    new CloneData.CloneData<RoomType, RoomTypesStatusDTO>();
+                CloneData.CloneData<RoomType, RoomTypesDTO> convertor =
+                    new CloneData.CloneData<RoomType, RoomTypesDTO>();
+
                 roomTypesDTOs.Add(convertor.CopyData(roomtype));
-                RoomTypesStatusDTO statusDTO = new RoomTypesStatusDTO();
-
-                if (statusDTO.IsActive == true)
-                {
-                    statusDTO.RoomStatus = "Free";
-                }
-
-                if(statusDTO.IsActive == false)
-                {
-                    statusDTO.RoomStatus = "Reserved";
-                }
-                roomTypesDTOs.Add(statusDTO);
             }
             return roomTypesDTOs;
         }
 
+        public RoomTypesDTO Get(int ID)
+        {
+            RoomTypeDAO roomTypeDAO = new RoomTypeDAO();
+            RoomType roomType = roomTypeDAO.GetByID(ID);
+            RoomTypesDTO roomTypesDTO = new RoomTypesDTO();
 
+            CloneData.CloneData<RoomType, RoomTypesDTO> convertor =
+                new CloneData.CloneData<RoomType, RoomTypesDTO>();
+            roomTypesDTO = convertor.CopyData(roomType);
+
+            return roomTypesDTO;
+        }
+
+        public void Insert(
+            string RoomTypes,
+            string Description,
+            int RoomID)
+        {
+            RoomType roomType = new RoomType();
+
+            roomType.RoomTypes = RoomTypes;
+            roomType.Description = Description;
+            roomType.RoomID = RoomID;
+
+            RoomTypeDAO roomTypeDAO = new RoomTypeDAO();
+            roomTypeDAO.Add(roomType);
+        } 
+
+        public void Update(
+            int ID,
+            string RoomTypes,
+            string Description,
+            int RoomID)
+        {
+            RoomType roomType = new RoomType();
+
+            roomType.ID = ID;
+            roomType.RoomTypes = RoomTypes;
+            roomType.Description = Description;
+            roomType.RoomID = RoomID;
+
+            RoomTypeDAO roomTypeDAO = new RoomTypeDAO();
+            roomTypeDAO.Update(roomType);
+        }
+
+        public void Delete(int ID)
+        {
+            RoomTypeDAO roomTypeDAO = new RoomTypeDAO();
+            roomTypeDAO.Delete(ID);
+        }
     }
 }

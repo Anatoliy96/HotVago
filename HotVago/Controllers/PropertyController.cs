@@ -119,20 +119,12 @@ namespace HotVago.Controllers
         [Route("DeleteProperty")]
         [HttpDelete]
 
-        public IActionResult DeleteProperty(Property property)
+        public IActionResult DeleteProperty(int ID)
         {
             PropertyBLL propertyBLL = new PropertyBLL();
 
-            if (property == null)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Cannot delete this property" });
-            }
-            else
-            {
-                propertyBLL.DeleteProperty(property);
-
+                propertyBLL.DeleteProperty(ID);
                 return Ok(new Response { Status = "Succeeded", Message = "Succesfully delete property" });
-            }
         }
     }
 }

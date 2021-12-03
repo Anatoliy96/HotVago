@@ -205,8 +205,9 @@ namespace HotVago.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    PropertyID = table.Column<int>(type: "int", nullable: false),
-                    RoomTypeID = table.Column<int>(type: "int", nullable: false)
+                    Sleeps = table.Column<int>(type: "int", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
+                    NumberOfRooms = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -220,11 +221,8 @@ namespace HotVago.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     RoomTypes = table.Column<string>(type: "text", nullable: true),
-                    IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    Sleeps = table.Column<int>(type: "int", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
-                    NumberOfRooms = table.Column<int>(type: "int", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: true)
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    RoomID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

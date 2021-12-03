@@ -195,10 +195,13 @@ namespace HotVago.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("PropertyID")
+                    b.Property<int>("NumberOfRooms")
                         .HasColumnType("int");
 
-                    b.Property<int>("RoomTypeID")
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<int>("Sleeps")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
@@ -232,20 +235,11 @@ namespace HotVago.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<int>("NumberOfRooms")
+                    b.Property<int>("RoomID")
                         .HasColumnType("int");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<string>("RoomTypes")
                         .HasColumnType("text");
-
-                    b.Property<int>("Sleeps")
-                        .HasColumnType("int");
 
                     b.HasKey("ID");
 

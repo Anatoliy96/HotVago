@@ -10,11 +10,9 @@ namespace HotVagoDAL.Models
    public class RoomType : Common 
     {
         public string RoomTypes { get; set; }
-        public bool IsActive { get; set; }
-        public int Sleeps { get; set; }
-        public decimal Price { get; set; }
-        public int NumberOfRooms { get; set; }
-
         public string Description { get; set; }
+
+        [ForeignKey("Rooms")]
+        public int RoomID { get; set; }
     }
 }

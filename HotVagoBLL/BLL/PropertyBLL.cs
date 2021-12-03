@@ -98,10 +98,10 @@ namespace HotVagoBLL.BLL
             propertyDAO.Update(property);
         }
 
-        public void DeleteProperty(Property property)
+        public void DeleteProperty(int ID)
         {
             PropertyDAO propertyDAO = new PropertyDAO();
-            propertyDAO.Delete(property);
+            propertyDAO.Delete(ID);
         }
     }
 }

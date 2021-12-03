@@ -30,9 +30,10 @@ namespace HotVagoDAL.DAO
             context.SaveChanges();
         }
 
-        public void Delete(TEntity entity)
+        public void Delete(int ID)
         {
-            context.Set<TEntity>().Remove(entity);
+           TEntity delete = context.Set<TEntity>().Find(ID);
+            context.Remove(delete);
             context.SaveChanges();
         }
 
