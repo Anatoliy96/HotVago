@@ -122,9 +122,15 @@ namespace HotVago.Controllers
         public IActionResult DeleteProperty(int ID)
         {
             PropertyBLL propertyBLL = new PropertyBLL();
-
+            if (ID.ToString() == null)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "No ID found" });
+            }
+            else
+            {
                 propertyBLL.DeleteProperty(ID);
                 return Ok(new Response { Status = "Succeeded", Message = "Succesfully delete property" });
+            }
         }
     }
 }

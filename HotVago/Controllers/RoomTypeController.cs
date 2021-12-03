@@ -19,7 +19,7 @@ namespace HotVago.Controllers
         {
             RoomTypesBLL roomTypesBLL = new RoomTypesBLL();
             var result = roomTypesBLL.GetAll();
-            if (result== null)
+            if (result == null)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "No data found" });
             }
@@ -52,17 +52,20 @@ namespace HotVago.Controllers
             string Description,
             int RoomID)
         {
-            RoomTypesBLL roomTypesBLL = new RoomTypesBLL();
-            roomTypesBLL.Insert(
-                RoomType, 
-                Description, 
-                RoomID);
-
             if (RoomType != null)
             {
-                StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Invalid RoomType" });
-            }
+                RoomTypesBLL roomTypesBLL = new RoomTypesBLL();
+                roomTypesBLL.Insert(
+                    RoomType,
+                    Description,
+                    RoomID);
+
                 return Ok(new Response { Status = "Succeed", Message = "Succesfully insert roomtype" });
+            }
+            else
+            {
+              return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "RoomType cannot be null" });
+            }
         }
 
         [Route("UpdateRoomType")]
@@ -74,18 +77,21 @@ namespace HotVago.Controllers
             string Description,
             int RoomID)
         {
-            RoomTypesBLL roomTypesBLL = new RoomTypesBLL();
-            roomTypesBLL.Update(
-                ID,
-                RoomType,
-                Description,
-                RoomID);
             if (RoomType == null)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "RoomType not found" });
             }
+            else
+            {
+                RoomTypesBLL roomTypesBLL = new RoomTypesBLL();
+                roomTypesBLL.Update(
+                    ID,
+                    RoomType,
+                    Description,
+                    RoomID);
 
-            return Ok(new Response { Status = "Succeed", Message = "Succesfully update roomtype" });
+                return Ok(new Response { Status = "Succeed", Message = "Succesfully update roomtype" });
+            }
         }
 
         [Route("DeleteRoomType")]
@@ -93,10 +99,17 @@ namespace HotVago.Controllers
 
         public IActionResult DeleteRoomType(int ID)
         {
-            RoomTypesBLL roomTypesBLL = new RoomTypesBLL();
-            roomTypesBLL.Delete(ID);
+            if (ID.ToString() == null)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "No ID found" });
+            }
+            else
+            {
+                RoomTypesBLL roomTypesBLL = new RoomTypesBLL();
+                roomTypesBLL.Delete(ID);
 
-            return Ok(new Response { Status = "Succeed", Message = "Succesfully delete roomtype" });
+                return Ok(new Response { Status = "Succeed", Message = "Succesfully delete roomtype" });
+            }
         }
     }
 }
