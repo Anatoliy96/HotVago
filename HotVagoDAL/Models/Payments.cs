@@ -13,8 +13,7 @@ namespace HotVagoDAL.Models
         public int RoomID { get; set; }
 
         public DateTime Date { get; set; }
-
-        public string Payment { get; set; }
+        public decimal Amount { get; set; }
 
         [ForeignKey("PaymentTypes")]
         public int PaymentTypesID { get; set; }

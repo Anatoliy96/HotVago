@@ -49,16 +49,14 @@ namespace HotVago.Controllers
 
         public IActionResult Insert(
             string RoomType,
-            string Description,
-            int RoomID)
+            string Description)
         {
             if (RoomType != null)
             {
                 RoomTypesBLL roomTypesBLL = new RoomTypesBLL();
                 roomTypesBLL.Insert(
                     RoomType,
-                    Description,
-                    RoomID);
+                    Description);
 
                 return Ok(new Response { Status = "Succeed", Message = "Succesfully insert roomtype" });
             }
@@ -74,8 +72,7 @@ namespace HotVago.Controllers
         public IActionResult UpdateRoomType(
             int ID,
             string RoomType,
-            string Description,
-            int RoomID)
+            string Description)
         {
             if (RoomType == null)
             {
@@ -87,8 +84,7 @@ namespace HotVago.Controllers
                 roomTypesBLL.Update(
                     ID,
                     RoomType,
-                    Description,
-                    RoomID);
+                    Description);
 
                 return Ok(new Response { Status = "Succeed", Message = "Succesfully update roomtype" });
             }

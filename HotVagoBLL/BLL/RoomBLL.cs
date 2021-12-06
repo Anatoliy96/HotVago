@@ -42,12 +42,16 @@ namespace HotVagoBLL.BLL
         public void Insert(
             int Sleeps,
             decimal Price,
-            int NumberOfRooms)
+            int NumberOfRooms,
+            int PropertyID,
+            int RoomTypeID)
         {
             Room room = new Room();
             room.Sleeps = Sleeps;
             room.Price = Price;
             room.NumberOfRooms = NumberOfRooms;
+            room.PropertyID = PropertyID;
+            room.RoomTypeID = RoomTypeID;
 
             RoomDAO roomDAO = new RoomDAO();
             roomDAO.Add(room);
@@ -57,13 +61,17 @@ namespace HotVagoBLL.BLL
             int ID,
             int Sleeps,
             decimal Price,
-            int NumberOfRooms)
+            int NumberOfRooms,
+            int PropertyID,
+            int RoomTypeID)
         {
             Room room = new Room();
             room.ID = ID;
             room.Sleeps = Sleeps;
             room.Price = Price;
             room.NumberOfRooms = NumberOfRooms;
+            room.PropertyID = PropertyID;
+            room.RoomTypeID = RoomTypeID;
 
             RoomDAO roomDAO = new RoomDAO();
             roomDAO.Update(room);

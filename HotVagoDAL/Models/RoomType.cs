@@ -10,9 +10,5 @@ namespace HotVagoDAL.Models
    public class RoomType : Common 
     {
         public string RoomTypes { get; set; }
-        public string Description { get; set; }
-
-        [ForeignKey("Rooms")]
-        public int RoomID { get; set; }
-    }
+        public string Description { get; set; }    }
 }

@@ -48,7 +48,9 @@ namespace HotVago.Controllers
         public IActionResult InsertRoom(
             int Sleeps,
             decimal Price,
-            int NumberOfRooms)
+            int NumberOfRooms,
+            int PropertyID,
+            int RoomTypeID)
         {
             if (Sleeps.ToString() != null)
             {
@@ -56,7 +58,9 @@ namespace HotVago.Controllers
                 roomBLL.Insert(
                     Sleeps,
                     Price,
-                    NumberOfRooms);
+                    NumberOfRooms,
+                    PropertyID,
+                    RoomTypeID);
                 return Ok(new Response { Status = "Succeed", Message = "Room inserted succesfully" });
             }
             else
@@ -72,7 +76,9 @@ namespace HotVago.Controllers
             int ID,
             int Sleeps,
             decimal Price,
-            int NumberOfRooms)
+            int NumberOfRooms,
+            int PropertyID,
+            int RoomTypeID)
         {
             if (ID.ToString() == null)
             {
@@ -85,7 +91,9 @@ namespace HotVago.Controllers
                     ID,
                     Sleeps,
                     Price,
-                    NumberOfRooms);
+                    NumberOfRooms,
+                    PropertyID,
+                    RoomTypeID);
 
                 return Ok(new Response { Status = "Succeed", Message = "Succesfully update room" }); 
             }

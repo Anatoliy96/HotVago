@@ -42,7 +42,6 @@ namespace HotVagoDAL.DAO.Context
 
         public DbSet<PropertyType> PropertyTypes { get; set; }
         public DbSet<Room> Rooms { get; set; }
-        public DbSet<RoomsBooked> BookedRooms { get; set; }
         public DbSet<RoomType> RoomTypes { get; set; }
 
         public DbSet<Facilities> Facilities { get; set; }

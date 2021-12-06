@@ -14,5 +14,12 @@ namespace HotVagoDAL.Models
         public decimal Price { get; set; }
 
         public int NumberOfRooms { get; set; }
+
+        [ForeignKey("PropertyID")]
+        public int PropertyID { get; set; }
+
+        [ForeignKey("RoomType")]
+
+        public int RoomTypeID { get; set; }
     }
 }

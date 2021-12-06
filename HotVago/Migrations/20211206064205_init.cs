@@ -48,26 +48,12 @@ namespace HotVago.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BookedRooms",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    BookingID = table.Column<int>(type: "int", nullable: false),
-                    RoomID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BookedRooms", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Bookings",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    PropertyID = table.Column<int>(type: "int", nullable: false),
+                    RoomID = table.Column<int>(type: "int", nullable: false),
                     GuestsID = table.Column<int>(type: "int", nullable: false),
                     FromDate = table.Column<DateTime>(type: "datetime", nullable: false),
                     ToDate = table.Column<DateTime>(type: "datetime", nullable: false),
@@ -207,7 +193,9 @@ namespace HotVago.Migrations
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     Sleeps = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
-                    NumberOfRooms = table.Column<int>(type: "int", nullable: false)
+                    NumberOfRooms = table.Column<int>(type: "int", nullable: false),
+                    PropertyID = table.Column<int>(type: "int", nullable: false),
+                    RoomTypeID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -221,8 +209,7 @@ namespace HotVago.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     RoomTypes = table.Column<string>(type: "text", nullable: true),
-                    Description = table.Column<string>(type: "text", nullable: true),
-                    RoomID = table.Column<int>(type: "int", nullable: false)
+                    Description = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -389,9 +376,6 @@ namespace HotVago.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
-
-            migrationBuilder.DropTable(
-                name: "BookedRooms");
 
             migrationBuilder.DropTable(
                 name: "Bookings");

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotVago.Migrations
 {
     [DbContext(typeof(HotVagoContext))]
-    [Migration("20211203121427_init")]
+    [Migration("20211206064205_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,10 +31,10 @@ namespace HotVago.Migrations
                     b.Property<int>("GuestsID")
                         .HasColumnType("int");
 
-                    b.Property<int>("PropertyID")
+                    b.Property<int>("RoomCount")
                         .HasColumnType("int");
 
-                    b.Property<int>("RoomCount")
+                    b.Property<int>("RoomID")
                         .HasColumnType("int");
 
                     b.Property<string>("Status")
@@ -203,6 +203,12 @@ namespace HotVago.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18, 2)");
 
+                    b.Property<int>("PropertyID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoomTypeID")
+                        .HasColumnType("int");
+
                     b.Property<int>("Sleeps")
                         .HasColumnType("int");
 
@@ -237,32 +243,12 @@ namespace HotVago.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
-                    b.Property<int>("RoomID")
-                        .HasColumnType("int");
-
                     b.Property<string>("RoomTypes")
                         .HasColumnType("text");
 
                     b.HasKey("ID");
 
                     b.ToTable("RoomTypes");
-                });
-
-            modelBuilder.Entity("HotVagoDAL.Models.RoomsBooked", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("BookingID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RoomID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("BookedRooms");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

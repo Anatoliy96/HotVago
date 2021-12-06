@@ -42,14 +42,12 @@ namespace HotVagoBLL.BLL
 
         public void Insert(
             string RoomTypes,
-            string Description,
-            int RoomID)
+            string Description)
         {
             RoomType roomType = new RoomType();
 
             roomType.RoomTypes = RoomTypes;
             roomType.Description = Description;
-            roomType.RoomID = RoomID;
 
             RoomTypeDAO roomTypeDAO = new RoomTypeDAO();
             roomTypeDAO.Add(roomType);
@@ -58,15 +56,13 @@ namespace HotVagoBLL.BLL
         public void Update(
             int ID,
             string RoomTypes,
-            string Description,
-            int RoomID)
+            string Description)
         {
             RoomType roomType = new RoomType();
 
             roomType.ID = ID;
             roomType.RoomTypes = RoomTypes;
             roomType.Description = Description;
-            roomType.RoomID = RoomID;
 
             RoomTypeDAO roomTypeDAO = new RoomTypeDAO();
             roomTypeDAO.Update(roomType);
