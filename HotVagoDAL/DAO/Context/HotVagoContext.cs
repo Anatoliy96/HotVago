@@ -1,4 +1,6 @@
 ﻿using HotVagoDAL.Models;
+using HotVagoDAL.Models.Authentication;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -9,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace HotVagoDAL.DAO.Context
 {
-    public class HotVagoContext : IdentityDbContext
+    public class HotVagoContext : IdentityDbContext<ApplicationUser>
     {
         public HotVagoContext(DbContextOptions<HotVagoContext> options)
             : base(options)
