@@ -1,6 +1,7 @@
 ﻿using HotVagoBLL.BLL.DTO;
 using HotVagoDAL.DAO;
 using HotVagoDAL.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,15 +15,16 @@ namespace HotVagoBLL.BLL
         public List<PropertyDTO> GetAll()
         {
             PropertyDAO propertyDAO = new PropertyDAO();
-            List<Property> properties = (List<Property>)propertyDAO.GetAll();
+            List<Property> properties = propertyDAO.GetDbSet().Include(p => p.PropertyType).ToList();
             List<PropertyDTO> propertyDTO = new List<PropertyDTO>();
 
             foreach (var p in properties)
             {
                 CloneData.CloneData<Property, PropertyDTO> convertor =
                     new CloneData.CloneData<Property, PropertyDTO>();
-
-                propertyDTO.Add(convertor.CopyData(p));
+                PropertyDTO dto = convertor.CopyData(p);
+                dto.PropertyType = p.PropertyType;
+                propertyDTO.Add(dto);
             }
 
             return propertyDTO;

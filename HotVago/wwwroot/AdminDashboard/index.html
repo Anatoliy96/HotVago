@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HotVago Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    
+
+</head>
+<body>
+    <!--SideBar-->
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="#">
+                        <span class="icon"><ion-icon name="sunny-outline"></ion-icon></span>
+                        <span class="title">HotVago</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                        <span class="title">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><ion-icon name="add-circle-outline"></ion-icon></span>
+                        <span class="title">Insert</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><ion-icon name="pencil-outline"></ion-icon></span>
+                        <span class="title">Update</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><ion-icon name="trash-outline"></ion-icon></span>
+                        <span class="title">Delete</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
+                        <span class="title">Sing Out</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!--main-->
+        <div class="main">
+            <div class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+                <!--search-->
+                <div class="search">
+                    <label>
+                        <input type="text" placeholder="Search here">
+                        <ion-icon name="search-circle-outline"></ion-icon>
+                    </label>
+                </div>
+            </div>
+            <!--cards-->
+            <div class="cardBox">
+                <div onclick="loadAllProperties()" id="properties-link" class="card">
+                    <div>
+                        <div class="numbers">120</div>
+                        <div class="cardName">Properties</div>
+                    </div>
+                    <div class="iconBx">
+                        <ion-icon name="storefront-outline"></ion-icon>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <div class="numbers">6456</div>
+                        <div class="cardName">Payments</div>
+                    </div>
+                    <div class="iconBx">
+                        <ion-icon name="cash-outline"></ion-icon>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <div class="numbers">756</div>
+                        <div class="cardName">Bookings</div>
+                    </div>
+                    <div class="iconBx">
+                        <ion-icon name="book-outline"></ion-icon>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <div class="numbers">54645</div>
+                        <div class="cardName">Guests</div>
+                    </div>
+                    <div class="iconBx">
+                        <ion-icon name="people-outline"></ion-icon>
+                    </div>
+                </div>
+            </div>
+            <!--Details List-->
+            <div class="details">
+                <div class="sortedList">
+                    <div class="listHeader">
+                        <h2>Properties</h2>
+                        <a href="#" class="btn">View all</a>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>ID</td>
+                                <td>PropertyName</td>
+                                <td>Description</td>
+                                <td>Address</td>
+                                <td>City</td>
+                                <td>Country</td>
+                                <td>Postal Code</td>
+                                <td>PhoneNumber</td>
+                                <td>E-Mail</td>
+                                <td>PropertyTypeID</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Evmolpia</td>
+                                <td>Best place in Plovdiv</td>
+                                <td>Centura</td>
+                                <td>Plovdiv</td>
+                                <td>Bulgaria</td>
+                                <td>4000</td>
+                                <td>0894511905</td>
+                                <td>anatoliyd@abv.bg</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Novotel</td>
+                                <td>Your favorite place</td>
+                                <td>Kurshaka</td>
+                                <td>Plovdiv</td>
+                                <td>Bulgaria</td>
+                                <td>4000</td>
+                                <td>0894511905</td>
+                                <td>anatoliyd@abv.bg</td>
+                                <td>1</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--icon script-->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <script>
+        // Menu toggle
+        let toggle = document.querySelector('.toggle');
+        let navigation = document.querySelector('.navigation');
+        let main = document.querySelector('.main');
+
+        toggle.onclick = function(){
+            navigation.classList.toggle('active');
+            main.classList.toggle('active');
+        }
+
+        let list = document.querySelectorAll('.navigation li');
+        function activeLink(){
+            list.forEach((item) =>
+            item.classList.remove('hovered'));
+            this.classList.add('hovered');
+        }
+        list.forEach((item) =>
+        item.addEventListener('mouseover', activeLink));
+    </script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="./JS/AjaxRequest.js"></script>
+    
+</body>
+</html>

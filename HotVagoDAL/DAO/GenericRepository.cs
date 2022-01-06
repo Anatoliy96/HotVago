@@ -1,5 +1,6 @@
 ﻿using HotVagoDAL.DAO.Context;
 using HotVagoDAL.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,6 +57,11 @@ namespace HotVagoDAL.DAO
         {
             context.Set<TEntity>().Update(entity);
             context.SaveChanges();
+        }
+
+        public DbSet<TEntity> GetDbSet()
+        {
+            return context.Set<TEntity>();
         }
     }
 }

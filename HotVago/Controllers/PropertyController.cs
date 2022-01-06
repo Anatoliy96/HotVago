@@ -1,6 +1,7 @@
 ﻿using HotVagoBLL.BLL;
 using HotVagoDAL.Models;
 using HotVagoDAL.Models.Response;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -16,6 +17,7 @@ namespace HotVago.Controllers
     {
         [Route("AllProperties")]
         [HttpGet]
+        [EnableCors]
         public IActionResult GetAll()
         {
             PropertyBLL propertyBLL = new PropertyBLL();

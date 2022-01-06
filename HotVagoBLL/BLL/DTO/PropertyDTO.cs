@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HotVagoDAL.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,5 +25,6 @@ namespace HotVagoBLL.BLL.DTO
         public int PhoneNumber { get; set; }
 
         public string Email { get; set; }
+        public PropertyType PropertyType { get; set; }
     }
 }

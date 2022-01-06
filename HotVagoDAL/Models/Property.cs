@@ -27,5 +27,6 @@ namespace HotVagoDAL.Models
 
         [ForeignKey("PropertyType")]
         public int PropertyTypeID { get; set; }
+        public PropertyType PropertyType { get; set; }
     }
 }

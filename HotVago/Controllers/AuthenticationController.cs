@@ -1,14 +1,17 @@
-﻿using HotVagoDAL.Models.Authentication;
+﻿using HotVagoBLL.BLL.EmailServices;
+using HotVagoDAL.Models.Authentication;
 using HotVagoDAL.Models.Response;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Net.Mail;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,7 +38,7 @@ namespace HotVago.Controllers
 
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
-            var user = await userManager.FindByNameAsync(model.Username);
+                var user = await userManager.FindByNameAsync(model.Username);
             if (user != null && await userManager.CheckPasswordAsync(user,model.Password))
             {
                 var userRoles = await userManager.GetRolesAsync(user);
@@ -83,8 +86,15 @@ namespace HotVago.Controllers
                 UserName = model.Username
             };
             var result = await userManager.CreateAsync(user, model.Password);
+
             if (!result.Succeeded)
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
+
+            var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
+            var confirmationLink = Url.Action(nameof(ConfirmEmail), "Authentication",
+                new { token = token, userID = user.Id }, protocol: HttpContext.Request.Scheme);
+            EmailHelper emailHelper = new EmailHelper();
+            bool emailResponse = emailHelper.SendEmail(model.Email, confirmationLink);
 
             return Ok(new Response { Status = "Success", Message = "User created successfully!" });
         }
@@ -117,6 +127,18 @@ namespace HotVago.Controllers
             }
 
             return Ok(new Response { Status = "Success", Message = "User created successfully!" });
+        
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ConfirmEmail(string token, string email)
+        {
+            var user = await userManager.FindByEmailAsync(email);
+            if (user == null)
+                return View("Error");
+
+            var result = await userManager.ConfirmEmailAsync(user, token);
+            return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
     }
 }

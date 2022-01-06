@@ -45,6 +45,17 @@ namespace HotVago
                 .AddEntityFrameworkStores<HotVagoDAL.DAO.Context.HotVagoContext>()
                 .AddDefaultTokenProviders();
 
+            services.Configure<IdentityOptions>(opt =>
+            {
+                opt.Password.RequiredLength = 7;
+                opt.Password.RequireDigit = false;
+                opt.Password.RequireUppercase = false;
+
+                opt.User.RequireUniqueEmail = true;
+
+                opt.SignIn.RequireConfirmedEmail = true;
+            });
+
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -66,7 +77,20 @@ namespace HotVago
                  };
              });
 
-            services.AddControllers();
+            
+            services.AddControllers(options => options.EnableEndpointRouting = true);
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAnyOrigin",
+                    builder => builder
+                    .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .WithOrigins("https://localhost:44376/api/Property/AllProperties",
+                                    "http://127.0.0.1:5500"));
+                    
+            });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HotVago", Version = "v1" });
@@ -82,10 +106,14 @@ namespace HotVago
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "HotVago v1"));
             }
-
+            
             app.UseHttpsRedirection();
-
+            
             app.UseRouting();
+
+            app.UseCors(options =>
+            options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().WithOrigins());
+
 
             app.UseAuthentication();
             app.UseAuthorization();
