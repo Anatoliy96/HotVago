@@ -41,20 +41,16 @@ namespace HotVago
             {
                 options.UseMySQL(Configuration.GetConnectionString("ConnStr"));
             });
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<HotVagoDAL.DAO.Context.HotVagoContext>()
-                .AddDefaultTokenProviders();
-
-            services.Configure<IdentityOptions>(opt =>
+            services.AddIdentity<ApplicationUser, IdentityRole>(opt =>
             {
                 opt.Password.RequiredLength = 7;
                 opt.Password.RequireDigit = false;
                 opt.Password.RequireUppercase = false;
-
                 opt.User.RequireUniqueEmail = true;
-
                 opt.SignIn.RequireConfirmedEmail = true;
-            });
+            })
+                .AddEntityFrameworkStores<HotVagoDAL.DAO.Context.HotVagoContext>()
+                .AddDefaultTokenProviders();
 
             services.AddAuthentication(options =>
             {
@@ -79,6 +75,7 @@ namespace HotVago
 
             
             services.AddControllers(options => options.EnableEndpointRouting = true);
+            services.AddControllersWithViews();
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAnyOrigin",

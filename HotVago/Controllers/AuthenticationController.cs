@@ -53,6 +53,12 @@ namespace HotVago.Controllers
                     authClaims.Add(new Claim(ClaimTypes.Role, userRole));
                 }
 
+                bool emailStatus = await userManager.IsEmailConfirmedAsync(user);
+                if (emailStatus == false)
+                {
+                   return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Email is unconfirmed, please confirm it first" });
+                }
+
                 var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
                 var token = new JwtSecurityToken(
                     issuer: _configuration["JWT:ValidIssuer"],
@@ -91,10 +97,12 @@ namespace HotVago.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
 
             var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
-            var confirmationLink = Url.Action(nameof(ConfirmEmail), "Authentication",
-                new { token = token, userID = user.Id }, protocol: HttpContext.Request.Scheme);
+            var confirmationLink = Url.Action("ConfirmEmail", "Email",
+                new { token, email = user.Email }, Request.Scheme);
             EmailHelper emailHelper = new EmailHelper();
-            bool emailResponse = emailHelper.SendEmail(model.Email, confirmationLink);
+            bool emailResponse = emailHelper.SendEmail(user.Email, confirmationLink);
+
+            await userManager.AddToRoleAsync(user, "User");
 
             return Ok(new Response { Status = "Success", Message = "User created successfully!" });
         }
@@ -116,6 +124,12 @@ namespace HotVago.Controllers
             if (!result.Succeeded)
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
 
+            var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
+            var confirmationLink = Url.Action("ConfirmEmail", "Email",
+                new { token, email = user.Email }, Request.Scheme);
+            EmailHelper emailHelper = new EmailHelper();
+            bool emailResponse = emailHelper.SendEmail(user.Email, confirmationLink);
+
             if (!await roleManager.RoleExistsAsync(UserRoles.Admin))
                 await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
             if (!await roleManager.RoleExistsAsync(UserRoles.Guest))
@@ -128,17 +142,6 @@ namespace HotVago.Controllers
 
             return Ok(new Response { Status = "Success", Message = "User created successfully!" });
         
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> ConfirmEmail(string token, string email)
-        {
-            var user = await userManager.FindByEmailAsync(email);
-            if (user == null)
-                return View("Error");
-
-            var result = await userManager.ConfirmEmailAsync(user, token);
-            return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
     }
 }

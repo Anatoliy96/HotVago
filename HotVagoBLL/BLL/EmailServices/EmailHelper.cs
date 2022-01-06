@@ -17,7 +17,6 @@ namespace HotVagoBLL.BLL.EmailServices
             mailMessage.To.Add(new MailAddress(userEmail));
 
             mailMessage.Subject = "Confirm your email";
-            mailMessage.IsBodyHtml = true;
             mailMessage.Body = confirmationLink;
 
             SmtpClient client = new SmtpClient();
@@ -33,9 +32,8 @@ namespace HotVagoBLL.BLL.EmailServices
             }
             catch (Exception ex)
             {
-                throw ex;
+                return false;
             }
-            //return false;
         }
     }
 }
