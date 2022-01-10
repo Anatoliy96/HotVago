@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HotVagoBLL.BLL.ViewModels.Dashboard
 {
-    class DashboardViewModel
+    public class DashboardViewModel
     {
         public int PropertyCount { get; set; }
         public int GuestCount { get; set; }
